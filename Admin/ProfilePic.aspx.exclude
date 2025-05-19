@@ -1,0 +1,43 @@
+﻿<%@ Page Title="" Language="VB" MasterPageFile="~/User/ClientMaster.master" AutoEventWireup="false" CodeFile="ProfilePic.aspx.vb" Inherits="User_ProfilePic" %>
+
+<asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
+</asp:Content>
+<asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
+
+<div class="portlet box blue ">
+                              <div class="portlet-title">
+                                 <h4><i class="icon-reorder"></i><asp:Label ID="lblContent" runat="server" ></asp:Label></h4>
+                            <%--     <div class="tools">
+                                    <a href="javascript:;" class="collapse"></a>
+                                 
+                                    <a href="javascript:;" class="remove"></a>
+                                 </div>--%>
+                              </div>
+                               <div runat="server" id="msg" style="display: none;" class="alert alert-error show">
+                                    </div>
+                              <div class="portlet-body form">
+                                 <!-- BEGIN FORM-->
+                                 <div class="form-horizontal form-bordered">
+                                   <asp:Label ID="lblerr" runat="server" Font-Bold="True" ForeColor="Red"></asp:Label>
+                                    <div class="control-group">
+                                       <label class="control-label">Upload Profile</label>
+                                       <div class="controls">
+                                       
+																		<asp:FileUpload ID="FileUpload" CssClass="default" runat="server" />
+																		
+																		
+                                                                            
+																	
+																		
+																	
+                                       </div></div>
+                                       <div class="control-group">
+                                       <label class="control-label">&nbsp; &nbsp; </label>
+                                       <div class="controls">
+                                       <asp:Button runat="server" ID="btn_update" Text="Update Profile Picture" CssClass="btn green" />   
+                                       </div>
+                                    </div>
+                                      
+                                    </div></div></div>
+</asp:Content>
+

@@ -1,0 +1,162 @@
+<%@ Page Language="VB" AutoEventWireup="false" CodeFile="Admin_BankDetail.aspx.vb"
+    MasterPageFile="~/Admin/AdminMaster.master" Inherits="Admin_BankDetail" Title=":: Create Operator ::" %>
+
+<asp:Content ContentPlaceHolderID="C1" ID="content1" runat="server">
+<div class="row-fluid">
+					<div class="span12">
+						<div class="box box-bordered">
+							<div class="box-title">
+								<h3><i class="icon-th-list"></i>  Add Bank Details</h3>
+							</div>
+							<div class="box-content nopadding">
+								<div class='form-horizontal form-bordered'>
+                                <div id="msg" runat="server" style="display:none;" class="alert alert-success show"></div>
+                                 <asp:Label runat="server" ID="lblmsg"></asp:Label>
+                    <div class="control-group">
+                       <asp:ValidationSummary runat="server" ID="errorsummary" CssClass="validerror" ValidationGroup="CreateUser" />
+  
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label">
+                            Bank-Name<span style="color: #ff0000">*</span> :</label>
+                        <div class="controls">
+                            <asp:TextBox ID="txtbankName" runat="server" CssClass="span6"></asp:TextBox><asp:RequiredFieldValidator
+                                                ID="ReqName" runat="server" ErrorMessage="Bank Name field can't be empty" ControlToValidate="txtbankName"
+                                                Display="None" ValidationGroup="CreateUser"></asp:RequiredFieldValidator>
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label">
+                             Branch-Name <span style="color: #ff0000">*</span> :</label>
+                        <div class="controls">
+                           <asp:TextBox ID="txtbranch" runat="server" CssClass="span6"></asp:TextBox>
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label">
+                            IFSCode<span style="color: #ff0000">*</span> :</label>
+                        <div class="controls">
+                           <asp:TextBox ID="txtIFSCode" runat="server" CssClass="span6"></asp:TextBox>
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label">
+                           Account No.<span style="color: #ff0000">*</span> :</label>
+                        <div class="controls">
+                       <asp:TextBox ID="txtaccoutno" runat="server" CssClass="span6"></asp:TextBox>
+                                            <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ErrorMessage="  Account No. field can't be empty"
+                                                ControlToValidate="txtaccoutno" Display="None" ValidationGroup="CreateUser"></asp:RequiredFieldValidator>
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label">
+                           Account Name <span style="color: #ff0000">*</span> :</label>
+                        <div class="controls">
+                            <asp:TextBox ID="txtAccountHolderName" runat="server" CssClass="span6"></asp:TextBox>
+                                            <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ErrorMessage=" Account HolderName field can't be empty"
+                                                ControlToValidate="txtAccountHolderName" Display="None" ValidationGroup="CreateUser"></asp:RequiredFieldValidator>
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label">
+                           Account Type <span style="color: #ff0000">*</span> :</label>
+                        <div class="controls">
+                             <asp:DropDownList runat="server" ID="ddlactype" AppendDataBoundItems="true" 
+                                               CssClass="span6">
+                                                <asp:ListItem Value="">--Select--</asp:ListItem>
+                                                <asp:ListItem Value="Saving">Saving</asp:ListItem>
+                                                <asp:ListItem Value="Current">Current</asp:ListItem>
+                                            </asp:DropDownList>
+                                           <%-- <asp:TextBox ID="txtAccountType" runat="server" Width="255px"></asp:TextBox>--%>
+                                            <asp:RequiredFieldValidator ID="ReqPassword" runat="server" ErrorMessage="Account Type field can't be empty"
+                                                ControlToValidate="ddlactype" Display="None" ValidationGroup="CreateUser"></asp:RequiredFieldValidator>
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label">
+                             IsActive <span style="color: #ff0000">*</span> :</label>
+                        <div class="controls">
+                             <asp:DropDownList runat="server" ID="ddlactive" AppendDataBoundItems="true" 
+                                               CssClass="span6">
+                                                <asp:ListItem Value="">--Select--</asp:ListItem>
+                                                <asp:ListItem Value="1">active</asp:ListItem>
+                                                <asp:ListItem Value="0">inactive</asp:ListItem>
+                                            </asp:DropDownList>
+                                            <%--  <asp:TextBox ID="txtRePwd" runat="server" TextMode="Password"  Width="255px"></asp:TextBox>--%>
+                                            <asp:RequiredFieldValidator ID="ReqRPassword" runat="server" ErrorMessage="IsActive  field can't be empty"
+                                                ControlToValidate="ddlactive" Display="None" ValidationGroup="CreateUser"></asp:RequiredFieldValidator>
+                        </div>
+                    </div>
+                         <div class="control-group">
+                        <label class="control-label">
+                             Bank Image <span style="color: #ff0000">*</span> :</label>
+                        <div class="controls">
+                            <asp:FileUpload ID="FileUpload1" runat="server" />
+                            <asp:Image ID="Image1" Width="150px" Height="150px" Visible="false" runat="server" />
+                                           
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label">
+                           Used For <span style="color: #ff0000">*</span> :</label>
+                        <div class="controls">
+                            <asp:TextBox ID="txtUsed" runat="server" CssClass="span6"></asp:TextBox>
+                                           
+                        </div>
+                    </div>
+                     <div class="form-actions">
+                       <asp:Button ID="btnsave" runat="server" Text="save"  
+                                                CssClass="btn btn-success"  />
+
+                                           
+                       
+                    </div>
+                    </div></div></div></div></div>
+
+                    <asp:Panel runat="server" ID="panal">
+                                                <asp:GridView ID="DataDisplay" runat="server"  AutoGenerateColumns="False"
+                                                    AllowPaging="True" CssClass="table table-nomargin" PageSize="100">
+                                                    <Columns>
+                                                        <asp:TemplateField HeaderText="S.No">
+                                                            <ItemTemplate>
+                                                                <%#Container.DataItemIndex + 1%>
+                                                            </ItemTemplate>
+                                                        </asp:TemplateField >
+                                                        <asp:BoundField DataField="BankName" HeaderText="Bank Name" />
+                                                        <asp:BoundField DataField="BranchName" HeaderText="Branch Name" />
+                                                        <asp:BoundField DataField="AcNo" HeaderText="Account No." />
+                                                        <asp:BoundField DataField="AcHolderName" HeaderText="Account Holder" />
+                                                        <asp:BoundField DataField="acType" HeaderText="Account Type" />
+                                                        <asp:BoundField DataField="status" HeaderText="Status" />
+                                                        <asp:TemplateField HeaderText="Image">
+                                                        <ItemTemplate>
+                                                            <asp:Image ID="img" Width="80px" Height="80px"  runat="server" />
+                                                            <asp:HiddenField ID="hfimg" Value='<%# eval("BankImage") %>' runat="server" />
+                                                        
+                                                        </ItemTemplate>
+                                                        </asp:TemplateField>
+                                                        <asp:TemplateField HeaderText="Edit">
+                                                            <ItemTemplate>
+                                                                <asp:LinkButton ID="lnkEdit" runat="server" CommandArgument='<%# Eval("ID") %>' CommandName="Edit1"
+                                                                    Text="Edit"></asp:LinkButton>
+                                                            </ItemTemplate>
+                                                        </asp:TemplateField>
+                                                        <asp:TemplateField HeaderText="Delete">
+                                                            <ItemTemplate>
+                                                                <asp:LinkButton ID="lnkDel" runat="server" CommandArgument='<%# Eval("ID") %>' CommandName="Delete1"
+                                                                    OnClientClick='return confirm("Are you sure want to delete ?")' Text="Delete"></asp:LinkButton>
+                                                            </ItemTemplate>
+                                                        </asp:TemplateField>
+                                                    </Columns>
+                                                    <RowStyle CssClass="RowStyle" />
+                                                    <PagerStyle CssClass="PagerStyle" />
+                                                    <HeaderStyle CssClass="HeaderStyle" />
+                                                    <PagerSettings Position="TopAndBottom" />
+                                                    <AlternatingRowStyle CssClass="AltRowStyle" />
+                                                </asp:GridView>
+                                            </asp:Panel>
+
+
+
+
+</asp:Content>

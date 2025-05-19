@@ -1,0 +1,208 @@
+﻿<%@ Master Language="VB" CodeFile="AdminMaster.master.vb" Inherits="Admin_AdminMaster" %>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<%@ Import Namespace="System.Xml" %>
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Website Control Panel</title>
+
+<link href="css/bootstrap.min.css" rel="stylesheet" type="text/css">
+<link href="css/brain-theme.css" rel="stylesheet" type="text/css">
+<link href="css/styles.css" rel="stylesheet" type="text/css">
+<link href="css/font-awesome.min.css" rel="stylesheet" type="text/css">
+<%--<link href='http://fonts.googleapis.com/css?family=Cuprum' rel='stylesheet' type='text/css'>--%>
+
+<%--<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.2/jquery-ui.min.js"></script>--%>
+  <script src="js/jquery.min.js" type="text/javascript"></script>
+    <script src="js/jquery-ui.min.js" type="text/javascript"></script>
+  
+<script type="text/javascript" src="js/plugins/charts/flot.js"></script>
+<script type="text/javascript" src="js/plugins/charts/flot.orderbars.js"></script>
+<script type="text/javascript" src="js/plugins/charts/flot.pie.js"></script>
+<script type="text/javascript" src="js/plugins/charts/flot.time.js"></script>
+<script type="text/javascript" src="js/plugins/charts/flot.animator.min.js"></script>
+<script type="text/javascript" src="js/plugins/charts/excanvas.min.js"></script>
+<script type="text/javascript" src="js/plugins/charts/flot.resize.min.js"></script>
+
+<script type="text/javascript" src="js/plugins/forms/uniform.min.js"></script>
+<script type="text/javascript" src="js/plugins/forms/select2.min.js"></script>
+<script type="text/javascript" src="js/plugins/forms/inputmask.js"></script>
+<script type="text/javascript" src="js/plugins/forms/autosize.js"></script>
+<script type="text/javascript" src="js/plugins/forms/inputlimit.min.js"></script>
+<script type="text/javascript" src="js/plugins/forms/listbox.js"></script>
+<script type="text/javascript" src="js/plugins/forms/multiselect.js"></script>
+<script type="text/javascript" src="js/plugins/forms/validate.min.js"></script>
+<script type="text/javascript" src="js/plugins/forms/tags.min.js"></script>
+
+<script type="text/javascript" src="js/plugins/forms/uploader/plupload.full.min.js"></script>
+<script type="text/javascript" src="js/plugins/forms/uploader/plupload.queue.min.js"></script>
+
+<script type="text/javascript" src="js/plugins/forms/wysihtml5/wysihtml5.min.js"></script>
+<script type="text/javascript" src="js/plugins/forms/wysihtml5/toolbar.js"></script>
+
+<script type="text/javascript" src="js/plugins/interface/jgrowl.min.js"></script>
+<script type="text/javascript" src="js/plugins/interface/datatables.min.js"></script>
+<script type="text/javascript" src="js/plugins/interface/prettify.js"></script>
+<script type="text/javascript" src="js/plugins/interface/fancybox.min.js"></script>
+<script type="text/javascript" src="js/plugins/interface/colorpicker.js"></script>
+<script type="text/javascript" src="js/plugins/interface/timepicker.min.js"></script>
+<script type="text/javascript" src="js/plugins/interface/fullcalendar.min.js"></script>
+<script type="text/javascript" src="js/plugins/interface/collapsible.min.js"></script>
+    <link href="datepicker/css/datepicker.css" rel="stylesheet" type="text/css" />
+    <script src="datepicker/js/bootstrap-datepicker.js" type="text/javascript"></script>
+<script type="text/javascript" src="js/bootstrap.min.js"></script>
+<script type="text/javascript" src="js/application.js"></script>
+<script>
+    $(function () {
+        $('.datepicker').datepicker()
+    });
+  </script>
+  <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+<body>
+    <form id="form1" runat="server">
+       <!-- Navbar -->
+    <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <div class="hidden-lg pull-right">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-right">
+                        <span class="sr-only">Toggle navigation</span>
+                        <i class="fa fa-chevron-down"></i>
+                    </button>
+
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".sidebar">
+                        <span class="sr-only">Toggle sidebar</span>
+                        <i class="fa fa-bars"></i>
+                    </button>
+                </div>
+
+                <ul class="nav navbar-nav navbar-left-custom">
+                    <li class="user dropdown">
+                        <a class="dropdown-toggle" data-toggle="dropdown">
+                            <img src="Icon.png" width="25" />
+                            <span><%= Session("User")%></span>
+                            <i class="caret"></i>
+                        </a>
+                        <ul class="dropdown-menu">
+                          <%--  <li><a href="#"><i class="fa fa-user"></i> Profile</a></li>
+                            <li><a href="#"><i class="fa fa-tasks"></i> Tasks</a></li>
+                            <li><a href="#"><i class="fa fa-cog"></i> Settings</a></li>--%>
+                            <li><a href="#"><i class="fa fa-mail-forward"></i> Logout</a></li>
+                        </ul>
+                    </li>
+                    <li><a class="nav-icon sidebar-toggle"><i class="fa fa-bars"></i></a></li>
+                </ul>
+            </div>
+
+            <ul class="nav navbar-nav navbar-right collapse" id="navbar-right">
+               <%-- <li>
+                    <a href="#">
+                        <i class="fa fa-rotate-right"></i>
+                        <span>Updates</span>
+                        <strong class="label label-danger">15</strong>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="#">
+                        <i class="fa fa-comments"></i>
+                        <span>Messages</span>
+                        <strong class="label label-danger">7</strong>
+                    </a>
+                </li>--%>
+
+                <li>
+                    <a href="Logout.aspx">
+                        <i class="fa fa-tasks"></i>
+                        <span>Logout</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <!-- /navbar -->
+
+
+    <!-- Switches -->
+   <%-- <div class="color-switch">
+        <a href="http://demo.interface.club/itsbrain/liquid/dark/index.aspx" title="Switch to dark verion"></a>
+    </div>
+
+    <div class="layout-switch">
+        <a href="http://demo.interface.club/itsbrain/fixed/light/index.aspx" title="Switch to fixed verion"></a>
+    </div>--%>
+    <!-- /switches -->
+
+    <br/>
+    <!-- Page header -->
+    <%--<div class="container-fluid">
+        <div class="page-header">
+            <div class="logo"><a href="home.aspx" title=""><img src="images/logo.png" alt=""></a></div>
+            <ul class="middle-nav">
+                <li><a href="AddEmplyee.aspx" class="btn btn-default"><i class="fa fa-male"></i> <span>Add Employee</span></a></li>
+              <li><a href="ShowStudent.aspx" class="btn btn-default"><i class="fa fa-users"></i> <span>Student List</span></a></li>
+                <li><a href="ShowEmployee.aspx" class="btn btn-default"><i class="fa fa-user"></i> <span>Employee List</span></a></li>
+                <li><a href="#" class="btn btn-default"><i class="fa fa-rupee"></i> <span>Fee</span></a></li>
+                <li><a href="#" class="btn btn-default"><i class="fa fa-star-o"></i> <span>Coming Event</span></a></li>
+                <li><a href="#" class="btn btn-default"><i class="fa fa-comments-o"></i> <span>Holidays</span></a></li>
+                <li><a href="#" class="btn btn-default"><i class="fa fa-envelope-o"></i> <span>SMS</span></a></li>
+               
+            </ul>
+        </div>
+    </div>--%>
+    <!-- /page header -->
+
+    <div class="page-container container-fluid">
+    	
+    	<!-- Sidebar -->
+        <div class="sidebar collapse">
+         <asp:Literal runat="server" ID="litmenu"></asp:Literal>
+        	<%--<ul class="navigation">
+            	<li class="active"><a href="index.aspx"><i class="fa fa-laptop"></i> Dashboard</a></li>
+            <%--    <li><a href="charts.html"><i class="fa fa-bar-chart-o"></i> Graphs and charts</a></li>
+                <li>
+                    <a href="#" class="expand"><i class="fa fa-align-justify"></i> Student Panel</a>
+                    <ul>
+                        <li><a href="Parentregister.aspx">Parent Registration</a></li>
+                        <li><a href="StudentRegistration.aspx">Student Registration</a></li>
+                      
+                    </ul>
+                </li>
+                
+            </ul>--%>
+        </div>-
+        <!-- /sidebar -->
+
+    
+        <!-- Page content -->
+        <div class="page-content">
+       <!-- Page title -->
+        	<div class="page-title">
+                <h5><i class="fa fa-bars"></i> 
+                    <asp:Literal ID="litpagename" runat="server"></asp:Literal> <small>Welcome, <%= Session("User")%></small></h5>
+                
+            </div>
+            <!-- /page title -->
+
+            
+          
+            <asp:ContentPlaceHolder ID="C1" runat="server">
+            </asp:ContentPlaceHolder>
+     <!-- Footer -->
+            <div class="footer">
+                <%--&copy; Copyright 2015. All rights reserved. Design and Developed by <a href="http://aspiretechnosys.com" title="">Aspire Technosys</a>--%>
+            </div>
+            <!-- /footer -->
+
+        </div>
+    </div>
+    </form>
+</body>
+</html>

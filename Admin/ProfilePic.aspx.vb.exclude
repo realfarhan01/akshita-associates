@@ -1,0 +1,46 @@
+﻿
+Partial Class User_ProfilePic
+    Inherits BasePage
+    Dim BLL As New BusinessLogicLayer
+    Dim enc As New Encryption64
+    Protected Sub Page_PreInit(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.PreInit
+        'If Session("User") = "Admin" Then
+        '    Page.MasterPageFile = "~/Master/AdminMaster.master"
+        'ElseIf Session("User") = "User" Then
+        '    Page.MasterPageFile = "~/Master/ClientMaster.master"
+        'End If
+    End Sub
+    Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
+        If Not IsPostBack Then
+
+        End If
+    End Sub
+
+    Protected Sub Page_LoadComplete(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.LoadComplete
+        Dim masterlbl As Label = CType(Master.FindControl("ltPageheader"), Label)
+
+        lblContent.Text = masterlbl.Text
+    End Sub
+    Protected Sub btn_update_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles btn_update.Click
+        Dim File As String = ""
+        If FileUpload.HasFile Then
+            If Not BLL.isImage(FileUpload.FileContent) Then
+                Exit Sub
+            End If
+            If FileUpload.PostedFile.ContentType.Split("/")(0) = "image" Then
+                File = FileUpload.FileName
+                File = enc.Encrypt(Session("MsrNo")).ToString() & ".jpg"
+                File = Replace(File, "/", "")
+                FileUpload.SaveAs(Server.MapPath("~/Upload/UserProfileImage/") + File)
+                BLL.ExecNonQuery("update MemberMaster set ProfilePic=@ProfilePic where Msrno=@Msrno", "@ProfilePic", File, "@Msrno", Session("msrno"))
+            End If
+        End If
+        Response.Redirect("~/User/ProfilePic")
+    End Sub
+
+    Protected Sub Page_PreRender(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.PreRender
+        Dim sbvaild As String = BLL.DisabledButtonCode & Page.ClientScript.GetPostBackEventReference(btn_update, Nothing) & ";"
+        btn_update.Attributes.Add("onclick", sbvaild)
+    End Sub
+
+End Class
